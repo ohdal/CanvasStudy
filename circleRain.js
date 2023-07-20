@@ -17,10 +17,12 @@ class Particle {
     this.x = x;
     this.y = y;
     this.vy = vy;
+    this.acc = 1.04;
     this.radius = radius;
   }
 
   update() {
+    this.vy *= this.acc;
     this.y += this.vy;
   }
 
