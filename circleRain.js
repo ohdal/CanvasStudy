@@ -1,16 +1,65 @@
 const canvas = document.querySelector("canvas");
 const ctx = canvas.getContext("2d");
 
-const CANVAS_WIDTH = innerWidth;
-const CANVAS_HEIGHT = innerHeight;
-const dpr = window.devicePixelRatio;
+/* Particle Class */
 
-canvas.style.width = CANVAS_WIDTH + "px";
-canvas.style.height = CANVAS_HEIGHT + "px";
+class Particle {
+  constructor(x, y, radius, vy) {
+    this.x = x;
+    this.y = y;
+    this.vy = vy;
+    this.acc = 1.04;
+    this.radius = radius;
+  }
 
-canvas.width = CANVAS_WIDTH * dpr;
-canvas.height = CANVAS_HEIGHT * dpr;
-ctx.scale(dpr, dpr);
+  update() {
+    this.vy *= this.acc;
+    this.y += this.vy;
+  }
+
+  draw() {
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.radius, 0, (Math.PI / 180) * 360); // radian
+    ctx.fillStyle = "#fff08b";
+    ctx.fill();
+    ctx.closePath();
+  }
+}
+
+const randomNumBetween = (min, max) => {
+  return Math.random() * (max - min + 1) + min;
+};
+
+/* init 함수 - 초기 컨버스 크기 설정 및 파티클 생성 */
+
+let CANVAS_WIDTH;
+let CANVAS_HEIGHT;
+let particles = [];
+
+function init(e) {
+  CANVAS_WIDTH = innerWidth;
+  CANVAS_HEIGHT = innerHeight;
+  const dpr = window.devicePixelRatio;
+
+  canvas.style.width = CANVAS_WIDTH + "px";
+  canvas.style.height = CANVAS_HEIGHT + "px";
+
+  canvas.width = CANVAS_WIDTH * dpr;
+  canvas.height = CANVAS_HEIGHT * dpr;
+  ctx.scale(dpr, dpr);
+
+  const TOTAL = CANVAS_WIDTH / 10;
+  particles = [];
+  for (let i = 0; i < TOTAL; i++) {
+    const x = randomNumBetween(0, CANVAS_WIDTH);
+    const y = randomNumBetween(0, CANVAS_HEIGHT);
+    const vy = randomNumBetween(1, 5);
+    const radius = randomNumBetween(10, 130);
+    particles.push(new Particle(x, y, radius, vy));
+  }
+}
+
+/* animation값 조절 dat.GUI 사용하기 */
 
 const feGaussianBlur = document.querySelector("feGaussianBlur");
 const feColorMatrix = document.querySelector("feColorMatrix");
@@ -46,45 +95,7 @@ f2.add(controls, "acc", 1, 1.5, 0.01).onChange((value) => {
   });
 });
 
-class Particle {
-  constructor(x, y, radius, vy) {
-    this.x = x;
-    this.y = y;
-    this.vy = vy;
-    this.acc = 1.04;
-    this.radius = radius;
-  }
-
-  update() {
-    this.vy *= this.acc;
-    this.y += this.vy;
-  }
-
-  draw() {
-    ctx.beginPath();
-    ctx.arc(this.x, this.y, this.radius, 0, (Math.PI / 180) * 360); // radian
-    ctx.fillStyle = "#fff08b";
-    ctx.fill();
-    ctx.closePath();
-  }
-}
-
-const x = 100;
-const y = 100;
-const radius = 50;
-const TOTAL = 30;
-const randomNumBetween = (min, max) => {
-  return Math.random() * (max - min + 1) + min;
-};
-
-let particles = [];
-for (let i = 0; i < TOTAL; i++) {
-  const x = randomNumBetween(0, CANVAS_WIDTH);
-  const y = randomNumBetween(0, CANVAS_HEIGHT);
-  const vy = randomNumBetween(1, 5);
-  const radius = randomNumBetween(10, 130);
-  particles.push(new Particle(x, y, radius, vy));
-}
+/* animate 함수 */
 
 let interval = 1000 / 60;
 let now, delta;
@@ -116,4 +127,13 @@ function animate() {
   then = now - (delta % interval);
 }
 
-animate();
+/* 이벤트 리스너 추가 */
+
+window.addEventListener("load", () => {
+  init();
+  animate();
+});
+
+window.addEventListener("resize", (e) => {
+  init(e);
+});
