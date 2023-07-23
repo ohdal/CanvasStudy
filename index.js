@@ -22,25 +22,25 @@ class Canvas extends CanvasOption {
 
     this.canvas.style.width = this.CANVAS_WIDTH + "px";
     this.canvas.style.height = this.CANVAS_HEIGHT + "px";
+
+    this.canvasObj = {
+      ctx: this.ctx,
+      width: this.CANVAS_WIDTH,
+      height: this.CANVAS_HEIGHT,
+    }
   }
 
   render(anim) {
     let now, delta;
     let then = Date.now();
-    const canvasObj = {
-      ctx: this.ctx,
-      width: this.CANVAS_WIDTH,
-      height: this.CANVAS_HEIGHT,
-    };
 
     if (this.id) {
       cancelAnimationFrame(this.id);
     }
 
     if (anim) {
-      anim.default.init(canvasObj);
+      anim.default.init(this.canvasObj);
     } else {
-      this.clearCanvas();
       return;
     }
 
@@ -51,8 +51,7 @@ class Canvas extends CanvasOption {
       delta = now - then;
       if (delta < this.interval) return;
 
-      this.clearCanvas();
-      anim.default.animate(canvasObj);
+      anim.default.animate(this.canvasObj);
 
       then = now - (delta % this.interval);
     };
