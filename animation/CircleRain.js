@@ -1,49 +1,24 @@
 import { randomNumBetween } from "../js/utils.js";
-
-/* Particle Class */
-
-class Particle {
-  constructor(ctx, x, y, radius, vy) {
-    this.ctx = ctx;
-    this.x = x;
-    this.y = y;
-    this.vy = vy;
-    this.acc = 1.04;
-    this.radius = radius;
-  }
-
-  update() {
-    this.vy *= this.acc;
-    this.y += this.vy;
-  }
-
-  draw() {
-    this.ctx.beginPath();
-    this.ctx.arc(this.x, this.y, this.radius, 0, (Math.PI / 180) * 360); // radian
-    this.ctx.fillStyle = "#fff08b";
-    this.ctx.fill();
-    this.ctx.closePath();
-  }
-}
+import CircleRainParticle from "../js/CircleRainParticle.js";
 
 let particles = [];
 
 /* init 함수 - 파티클 생성 */
-function init(ctx, width, height) {
-  const TOTAL = width / 15;
+function init({width, height}) {
+  const PARTICLE_NUM = width / 15;
 
   particles = [];
-  for (let i = 0; i < TOTAL; i++) {
+  for (let i = 0; i < PARTICLE_NUM; i++) {
     const x = randomNumBetween(0, width);
     const y = randomNumBetween(0, height);
     const vy = randomNumBetween(1, 5);
     const radius = randomNumBetween(10, 130);
-    particles.push(new Particle(ctx, x, y, radius, vy));
+    particles.push(new CircleRainParticle(x, y, radius, vy));
   }
 }
 
-/* animate 함수 */
-function animate(width, height) {
+/* animate 함수 - animation 진행 */
+function animate({width, height}) {
   particles.forEach((particle) => {
     particle.update();
     particle.draw();
@@ -57,7 +32,7 @@ function animate(width, height) {
   });
 }
 
-/* animation값 조절 dat.GUI 사용하기 */
+/* setGUI 함수 - dat.GUI를 이용한 animation값 조절 */
 function setGUI() {
   const feGaussianBlur = document.querySelector("feGaussianBlur");
   const feColorMatrix = document.querySelector("feColorMatrix");

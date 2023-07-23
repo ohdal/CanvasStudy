@@ -1,8 +1,9 @@
 import CanvasOption from "./js/CanvasOption.js";
 import * as CircleRainAnim from "./animation/CircleRain.js";
+import * as FireWorksAnim from "./animation/FireWorks.js";
 
 const animationList = ["CircleRain", "FireWorks"];
-let animIdx = 0;
+let animIdx = 1;
 
 class Canvas extends CanvasOption {
   constructor() {
@@ -26,13 +27,18 @@ class Canvas extends CanvasOption {
   render(anim) {
     let now, delta;
     let then = Date.now();
+    const canvasObj = {
+      ctx: this.ctx,
+      width: this.CANVAS_WIDTH,
+      height: this.CANVAS_HEIGHT,
+    };
 
     if (this.id) {
       cancelAnimationFrame(this.id);
     }
 
     if (anim) {
-      anim.default.init(this.ctx, this.CANVAS_WIDTH, this.CANVAS_HEIGHT);
+      anim.default.init(canvasObj);
     } else {
       this.clearCanvas();
       return;
@@ -46,7 +52,7 @@ class Canvas extends CanvasOption {
       if (delta < this.interval) return;
 
       this.clearCanvas();
-      anim.default.animate(this.CANVAS_WIDTH, this.CANVAS_HEIGHT);
+      anim.default.animate(canvasObj);
 
       then = now - (delta % this.interval);
     };
@@ -88,11 +94,11 @@ function animationChange() {
   switch (animationList[animIdx]) {
     case "CircleRain":
       canvas.render(CircleRainAnim);
-      CircleRainAnim.default.setGUI();
+      // CircleRainAnim.default.setGUI();
       document.body.id = "circleRain";
       break;
     case "FireWorks":
-      canvas.render();
+      canvas.render(FireWorksAnim);
       document.body.id = "fireWorks";
       break;
   }
