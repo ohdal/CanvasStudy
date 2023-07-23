@@ -4,7 +4,7 @@ import CircleRainParticle from "../js/CircleRainParticle.js";
 let particles = [];
 
 /* init 함수 - 파티클 생성 */
-function init({width, height}) {
+function init({ width, height }) {
   const PARTICLE_NUM = width / 15;
 
   particles = [];
@@ -18,7 +18,9 @@ function init({width, height}) {
 }
 
 /* animate 함수 - animation 진행 */
-function animate({width, height}) {
+function animate({ ctx, width, height }) {
+  ctx.clearRect(0, 0, width, height);
+
   particles.forEach((particle) => {
     particle.update();
     particle.draw();
