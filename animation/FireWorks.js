@@ -38,6 +38,9 @@ function animate({ ctx, width, height }) {
   ctx.fillStyle = "#00000040";
   ctx.fillRect(0, 0, width, height);
 
+  ctx.fillStyle = `rgba(255, 255, 255, ${particles.length / 40000})`;
+  ctx.fillRect(0, 0, width, height);
+
   if (Math.random() < 0.03 && tails.length < 8) createTail(width, height);
 
   tails.forEach((tail, idx) => {
