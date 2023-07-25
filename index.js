@@ -1,9 +1,10 @@
 import CanvasOption from "./js/CanvasOption.js";
 import * as CircleRainAnim from "./animation/CircleRain.js";
 import * as FireWorksAnim from "./animation/FireWorks.js";
+import * as CountdownAnim from "./animation/Countdown.js";
 
-const animationList = ["CircleRain", "FireWorks"];
-let animIdx = 1;
+const animationList = ["CircleRain", "FireWorks", "CountDown"];
+let animIdx = 2;
 
 class Canvas extends CanvasOption {
   constructor() {
@@ -27,7 +28,7 @@ class Canvas extends CanvasOption {
       ctx: this.ctx,
       width: this.CANVAS_WIDTH,
       height: this.CANVAS_HEIGHT,
-    }
+    };
   }
 
   render(anim) {
@@ -99,6 +100,10 @@ function animationChange() {
     case "FireWorks":
       canvas.render(FireWorksAnim);
       document.body.id = "fireWorks";
+      break;
+    case "CountDown":
+      canvas.render(CountdownAnim);
+      document.body.id = "countdown";
       break;
   }
 }
