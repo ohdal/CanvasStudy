@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 html,
 body {
   margin: 0;
@@ -7,12 +11,18 @@ body {
 }
 
 div#canvas-layout {
-  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: inherit;
+  height: inherit;
   overflow: hidden;
 }
 
 div#btn-layout {
   position: fixed;
+  top: 0;
+  left: 10px;
   z-index: 2;
   padding: 10px;
 }

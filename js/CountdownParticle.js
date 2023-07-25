@@ -2,14 +2,14 @@ import CanvasOption from "./CanvasOption.js";
 import { randomNumBetween } from "./utils.js";
 
 export default class CountdownParticle extends CanvasOption {
-  constructor() {
+  constructor(r) {
     super();
 
     this.opacity = randomNumBetween(0.2, 1);
 
     this.rFriction = randomNumBetween(0.95, 1.01);
     this.rAlpha = randomNumBetween(0, 5);
-    this.r = innerHeight / 4;
+    this.r = r;
 
     this.angleFriction = randomNumBetween(0.97, 0.99);
     this.angleAlpha = randomNumBetween(1, 2);
