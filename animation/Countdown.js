@@ -19,7 +19,7 @@ function animate({ ctx, width, height }) {
     particle.draw();
 
     if (particle.opacity < 0) {
-      particles.splice(idx, 1);
+      particles.splice(i, 1);
     }
   }
 }
