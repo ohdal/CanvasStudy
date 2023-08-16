@@ -9,7 +9,7 @@ let particles = [];
 function init({ ctx, width, height }) {
   img_opacity = 1;
   img.src = "assets/img_countdown.png";
-
+  
   const PARTICLE_NUM = 500;
   for (let i = 0; i < PARTICLE_NUM; i++) {
     particles.push(new CountdownParticle(CIRCLE_RADIUS));
@@ -17,10 +17,10 @@ function init({ ctx, width, height }) {
 }
 
 function animate({ ctx, width, height }) {
-  if (particles.length > 0) {
-    ctx.fillStyle = "#000000";
-    ctx.fillRect(0, 0, width, height);
+  ctx.fillStyle = "#000000";
+  ctx.fillRect(0, 0, width, height);
 
+  if (particles.length > 0) {
     if (img_opacity > 0) {
       img_opacity -= 0.02;
       ctx.globalAlpha = img_opacity;
