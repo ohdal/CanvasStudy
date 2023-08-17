@@ -1,21 +1,28 @@
-import LopePhysicsDot from "../js/LopePhysicsDot.js";
+import Dot from "../js/LopePhysicsDot.js";
+import Stick from "../js/LopePhysicsStick.js";
 
-const dots = [];
+let dots = [];
+let sticks = [];
 function init({ width, height }) {
-  dots.push(new LopePhysicsDot(400, 50));
+  dots = [new Dot(100, 100), new Dot(300, 300), new Dot(400, 400)]
+  sticks = [new Stick(dots[0], dots[1]), new Stick(dots[1], dots[2])];
+  
+  dots[0].pinned = true;
 }
 
 function animate({ ctx, width, height }) {
   ctx.fillStyle = "#FFFFFF";
   ctx.fillRect(0, 0, width, height);
 
-  for (let i = dots.length - 1; i >= 0; i--) {
-    const dot = dots[i];
+  dots.forEach((dot) => {
     dot.update();
     dot.draw();
+  });
 
-    if (dot.pos.x > width || dot.pos.y > height) dots.splice(i, 1);
-  }
+  sticks.forEach((stick) => {
+    stick.update();
+    stick.draw();
+  });
 }
 
 function setGUI() {}

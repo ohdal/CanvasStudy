@@ -10,9 +10,15 @@ export default class LopePhysicsDot extends CanvasOption {
 
     this.gravity = new Vector(0, 0.5);
     this.friction = 0.97;
+
+    this.pinned = false;
+
+    this.mass = 1;
   }
 
   update() {
+    if(this.pinned) return;
+
     let vel = Vector.sub(this.pos, this.oldPos);
 
     this.oldPos.setXY(this.pos.x, this.pos.y);
