@@ -42,7 +42,6 @@ class Canvas extends CanvasOption {
     }
 
     if (anim) {
-      this.ctx.resetTransform();
       this.clearCanvas();
       this.init();
       this.ctx.save();
