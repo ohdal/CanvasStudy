@@ -3,9 +3,10 @@ import * as CircleRainAnim from "./animation/CircleRain.js";
 import * as FireWorksAnim from "./animation/FireWorks.js";
 import * as CountdownAnim from "./animation/Countdown.js";
 import * as ConfettiAnim from "./animation/Confetti.js";
+import * as LopePhysicsAnim from "./animation/LopePhysics.js"
 
-const animationList = ["CircleRain", "FireWorks", "CountDown", "Confetti"];
-let animIdx = 3;
+const animationList = ["CircleRain", "FireWorks", "CountDown", "Confetti", "LopePhysics"];
+let animIdx = 4;
 
 class Canvas extends CanvasOption {
   constructor() {
@@ -113,6 +114,10 @@ function animationChange() {
     case "Confetti":
       canvas.render(ConfettiAnim);
       document.body.id = "confetti";
+      break;
+    case "LopePhysics":
+      canvas.render(LopePhysicsAnim);
+      document.body.id = "lopePhysics";
       break;
   }
 }
