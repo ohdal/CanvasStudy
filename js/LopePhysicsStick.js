@@ -22,10 +22,13 @@ export default class LopePhysicsStick extends CanvasOption {
     const dist = Math.sqrt(dx * dx + dy * dy);
     const diff = (dist - this.length) / dist;
 
-    // 현재 x, y의 값에 비율(diff)을 곱함으로써 차이값을 구할 수 있음
-    // 기준점에서 중력만 적용된다면 도달해야할 위치보다 가까운 위치로 이동시키게 함으로써
-    // stick이 고무같이 탄성이 있는것처럼 효과를 줄수 있음.
-    // (도달해야할 위치의 반대로 땡긴다고 생각하면 된다. 즉 tension이 1이라면 효과 x)
+    /* diff * dx 부분 설명
+    현재 x, y의 값에 비율(diff)을 곱함으로써 차이값을 구할 수 있음 */
+
+    /*  값 * this.tention 부분 설명
+    기준점에서 중력만 적용된다면 도달해야할 위치보다 가까운 위치로 이동시키게 함으로써
+    stick이 고무같이 탄성이 있는것처럼 효과를 줄수 있음.
+    (도달해야할 위치의 반대로 땡긴다고 생각하면 된다. 즉 tension이 1이라면 효과 x) */
     const offsetX = diff * dx * this.tension;
     const offsetY = diff * dy * this.tension;
 
