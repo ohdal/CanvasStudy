@@ -61,6 +61,7 @@ export default class ConfettiParticle extends CanvasOption {
       this.height * Math.sin((Math.PI / 180) * this.heightDelta)
     );
 
+    // this.ctx.resetTransform();
     this.ctx.setTransform(1, 0, 0, 1, 0, 0);
 
     const dpr = window.devicePixelRatio > 2 ? 2 : window.devicePixelRatio;
