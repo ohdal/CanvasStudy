@@ -31,7 +31,7 @@ export default class RopePhysicsRope {
   checkPullingOut() {
     const dist = this.dots[0].pos.dist(this.dots[1].pos);
 
-    if (dist / this.sticks[0].length > 1.5) this.dots[0].pinned = false;
+    if (dist / this.sticks[0].length > 1.4) this.dots[0].pinned = false;
   }
 
   update(mouse) {
