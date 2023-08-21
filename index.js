@@ -5,6 +5,8 @@ import * as CountdownAnim from "./animation/Countdown.js";
 import * as ConfettiAnim from "./animation/Confetti.js";
 import * as RopePhysicsAnim from "./animation/RopePhysics.js";
 
+import { lazyEvent } from "./js/utils.js";
+
 const animationList = ["CircleRain", "FireWorks", "CountDown", "Confetti", "RopePhysics"];
 let animIdx = 4;
 
@@ -133,6 +135,8 @@ window.addEventListener("load", () => {
   animationChange();
 });
 
+let timer = null;
 window.addEventListener("resize", () => {
   canvas.init();
+  timer = lazyEvent(animationChange, 300, timer);
 });

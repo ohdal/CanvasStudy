@@ -18,3 +18,23 @@ export const hexToRgb = (hex) => {
       }
     : null;
 };
+
+export const debounce = (fn, delay) => {
+  let timer = null;
+
+  return function func() {
+    clearTimeout(timer);
+
+    timer = setTimeout(() => {
+      fn.apply(this);
+    }, delay);
+  };
+};
+
+export const lazyEvent = (fn, delay, timer) => {
+  if(timer )clearTimeout(timer);
+
+  return setTimeout(() => {
+    fn();
+  }, delay);
+};
