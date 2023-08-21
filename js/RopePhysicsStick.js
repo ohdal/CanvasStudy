@@ -51,7 +51,8 @@ export default class RopePhysicsStick extends CanvasOption {
 
   draw() {
     this.ctx.beginPath();
-    this.ctx.strokeStyle = 10;
+    this.ctx.strokeStyle = "#999";
+    this.ctx.lineWidth = 1;
     this.ctx.moveTo(this.startPoint.pos.x, this.startPoint.pos.y);
     this.ctx.lineTo(this.endPoint.pos.x, this.endPoint.pos.y);
     this.ctx.stroke();

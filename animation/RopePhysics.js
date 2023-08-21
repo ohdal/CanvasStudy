@@ -16,13 +16,14 @@ function init({ width, height }) {
       new Rope({
         x: randomNumBetween(width * 0.2, width * 0.8),
         y: 120,
+        gap: randomNumBetween(height * 0.05, height * 0.08),
       })
     );
   }
 }
 
 function animate({ ctx, width, height }) {
-  ctx.fillStyle = "#FFFFFF";
+  ctx.fillStyle = "#1F1F1F";
   ctx.fillRect(0, 0, width, height);
 
   ropes.forEach((rope) => {

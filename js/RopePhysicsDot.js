@@ -43,10 +43,7 @@ export default class RopePhysicsDot extends CanvasOption {
   }
 
   draw() {
-    this.ctx.fillStyle = "#000000";
-    this.ctx.beginPath();
-    this.ctx.arc(this.pos.x, this.pos.y, 10, 0, Math.PI * 2);
-    this.ctx.fill();
-    this.ctx.closePath();
+    this.ctx.fillStyle = "#999";
+    this.ctx.fillRect(this.pos.x - this.mass, this.pos.y - this.mass, this.mass * 2, this.mass * 2);
   }
 }
