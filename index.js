@@ -3,9 +3,9 @@ import * as CircleRainAnim from "./animation/CircleRain.js";
 import * as FireWorksAnim from "./animation/FireWorks.js";
 import * as CountdownAnim from "./animation/Countdown.js";
 import * as ConfettiAnim from "./animation/Confetti.js";
-import * as LopePhysicsAnim from "./animation/LopePhysics.js"
+import * as RopePhysicsAnim from "./animation/RopePhysics.js";
 
-const animationList = ["CircleRain", "FireWorks", "CountDown", "Confetti", "LopePhysics"];
+const animationList = ["CircleRain", "FireWorks", "CountDown", "Confetti", "RopePhysics"];
 let animIdx = 4;
 
 class Canvas extends CanvasOption {
@@ -97,8 +97,8 @@ function createButton() {
 function animationChange() {
   document.body.id = "";
 
-  canvas.onmousemove = null
-  canvas.ontouchmove = null
+  canvas.onmousemove = null;
+  canvas.ontouchmove = null;
 
   switch (animationList[animIdx]) {
     case "CircleRain":
@@ -118,9 +118,9 @@ function animationChange() {
       canvas.render(ConfettiAnim);
       document.body.id = "confetti";
       break;
-    case "LopePhysics":
-      canvas.render(LopePhysicsAnim);
-      document.body.id = "lopePhysics";
+    case "RopePhysics":
+      canvas.render(RopePhysicsAnim);
+      document.body.id = "ropePhysics";
       break;
   }
 }

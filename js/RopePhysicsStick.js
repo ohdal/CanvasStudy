@@ -1,6 +1,6 @@
 import CanvasOption from "./CanvasOption.js";
 
-export default class LopePhysicsStick extends CanvasOption {
+export default class RopePhysicsStick extends CanvasOption {
   constructor(p1, p2) {
     super();
 
@@ -10,7 +10,7 @@ export default class LopePhysicsStick extends CanvasOption {
     this.length = this.startPoint.pos.dist(this.endPoint.pos);
 
     // 탄성
-    this.tension = 0.05;
+    this.tension = 0.1;
   }
 
   update() {
