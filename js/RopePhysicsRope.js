@@ -28,7 +28,15 @@ export default class RopePhysicsRope {
     this.dots[this.segments - 1].isLast = true;
   }
 
+  checkPullingOut() {
+    const dist = this.dots[0].pos.dist(this.dots[1].pos);
+
+    if (dist / this.sticks[0].length > 1.5) this.dots[0].pinned = false;
+  }
+
   update(mouse) {
+    this.checkPullingOut();
+
     this.dots.forEach((dot) => {
       dot.update(mouse);
     });
