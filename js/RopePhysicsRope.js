@@ -25,6 +25,7 @@ export default class RopePhysicsRope {
     }
 
     this.dots[0].pinned = true;
+    this.dots[this.segments - 1].isLast = true;
   }
 
   update(mouse) {

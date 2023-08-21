@@ -12,6 +12,7 @@ export default class RopePhysicsDot extends CanvasOption {
     this.friction = 0.97;
 
     this.pinned = false;
+    this.isLast = false;
 
     this.mass = 1;
   }
@@ -43,7 +44,12 @@ export default class RopePhysicsDot extends CanvasOption {
   }
 
   draw() {
-    this.ctx.fillStyle = "#999";
-    this.ctx.fillRect(this.pos.x - this.mass, this.pos.y - this.mass, this.mass * 2, this.mass * 2);
+    const lastSize = this.mass * 5;
+
+    this.ctx.fillStyle = this.isLast ? "#fbe95e" : "#999";
+    if (this.isLast) {
+      this.ctx.arc(this.pos.x, this.pos.y + lastSize, lastSize, 0, (Math.PI / 180) * 360);
+      this.ctx.fill();
+    } else this.ctx.fillRect(this.pos.x - this.mass, this.pos.y - this.mass, this.mass * 2, this.mass * 2);
   }
 }
