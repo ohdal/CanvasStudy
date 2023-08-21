@@ -16,8 +16,8 @@ export default class LopePhysicsDot extends CanvasOption {
     this.mass = 1;
   }
 
-  update() {
-    if(this.pinned) return;
+  update(mouse) {
+    if (this.pinned) return;
 
     let vel = Vector.sub(this.pos, this.oldPos);
 
@@ -26,6 +26,20 @@ export default class LopePhysicsDot extends CanvasOption {
     vel.mult(this.friction);
     vel.add(this.gravity);
     this.pos.add(vel);
+
+    if (!mouse.isClick) return;
+
+    let { x: dx, y: dy } = Vector.sub(mouse.pos, this.pos);
+
+    const dist = Math.sqrt(dx * dx, dy * dy); // 마우스와 점사이 거리 구하기
+
+    if (dist > mouse.radius) return;
+
+    const direction = new Vector(dx / dist, dy / dist); // 방향 벡터 구하기
+    const force = (mouse.radius - dist) / mouse.radius; // 0 ~ 1 dot에 가까울수록 1에 가까운 값
+
+    if (force > 0.8) this.pos.setXY(mouse.pos.x, mouse.pos.y);
+    else this.pos.add(direction.mult(force).mult(5));
   }
 
   draw() {

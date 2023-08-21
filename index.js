@@ -97,6 +97,9 @@ function createButton() {
 function animationChange() {
   document.body.id = "";
 
+  canvas.onmousemove = null
+  canvas.ontouchmove = null
+
   switch (animationList[animIdx]) {
     case "CircleRain":
       canvas.render(CircleRainAnim);
